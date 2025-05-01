@@ -50,13 +50,7 @@ const cleanedData = uniqueByDOL.map(item => {
         'Postal Code': Postal_Code,
         'Electric Range': Electric_Range,
         'Model Year': Model_Year,
-        'DOL Vehicle ID': ______,
         'VIN (1-10)': vin,
-        'Vehicle Location': _,
-        'Electric Utility': __,
-        '2020 Census Tract': ___,
-        'Legislative District': ____,
-        'Base MSRP': _____,
         ...rest
     } = item;
 
@@ -71,4 +65,17 @@ const cleanedData = uniqueByDOL.map(item => {
     };
 });
 
-console.log(cleanedData);
+// Step 4: Classification by Electric Vehicle Type
+const classifiedByType = {};
+
+for (const item of cleanedData) {
+    const type = item.EVT || 'Unknown';
+
+    if (!classifiedByType[type]) {
+        classifiedByType[type] = [];
+    }
+
+    classifiedByType[type].push(item);
+}
+
+console.log(classifiedByType);
